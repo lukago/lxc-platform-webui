@@ -5,5 +5,7 @@
 # gradle
 .gradle
 build
+out
 
+# MacOS
 .DS_Store

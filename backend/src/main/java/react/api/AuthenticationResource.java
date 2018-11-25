@@ -17,6 +17,7 @@ import javax.servlet.http.HttpSession;
 @RestController()
 @RequestMapping("/api/session")
 public class AuthenticationResource {
+
   @Autowired
   AuthenticationManager authenticationManager;
 
@@ -25,7 +26,7 @@ public class AuthenticationResource {
     Authentication authentication = new UsernamePasswordAuthenticationToken(credentials.getUsername(), credentials.getPassword());
     SecurityContextHolder.getContext().setAuthentication(authenticationManager.authenticate(authentication));
 
-    User user = new User(credentials.getUsername(), httpSession.getId(), true);
+    var user = new User(credentials.getUsername(), httpSession.getId(), true);
     httpSession.setAttribute("user", user);
     return user;
   }
