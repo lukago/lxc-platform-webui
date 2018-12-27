@@ -22,6 +22,8 @@ spring:
     username: test
     password: passwd
     driverClassName: org.postgresql.Driver
+  mvc:
+
 
 server:
   port: 8080

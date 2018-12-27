@@ -32,7 +32,6 @@ public class SwaggerConfig {
         .securitySchemes(List.of(new ApiKey("Bearer %token", "Authorization", "Header")))
         .tags(new Tag("users", "Operations about users"))
         .tags(new Tag("auth", "Authorization"))
-        .tags(new Tag("ping", "Just a ping"))
         .genericModelSubstitutes(Optional.class);
   }
 

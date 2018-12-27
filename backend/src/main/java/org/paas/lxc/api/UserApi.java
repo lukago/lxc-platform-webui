@@ -21,9 +21,9 @@ import org.paas.lxc.dto.UserDto;
 import org.paas.lxc.service.UserService;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/api/users")
 @Api(tags = "users")
-public class UserApi extends BaseApi {
+public class UserApi {
 
   @Autowired
   private UserService userService;
