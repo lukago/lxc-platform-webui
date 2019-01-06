@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: dev
+    active: test
   application:
     name: lxc
   jpa:
@@ -8,7 +8,7 @@ spring:
     show-sql: true
     generate-ddl: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: create-drop
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
@@ -18,13 +18,13 @@ spring:
         format_sql: true
   datasource:
     platform: postgres
-    url: jdbc:postgresql://localhost:5432/lxcdb
+    url: jdbc:postgresql://localhost:5432/lxcdbtest
     username: lxcadmin
     password: passwd
     driverClassName: org.postgresql.Driver
 
 server:
-  port: 8080
+  port: 8083
 
 logging:
   level:
