@@ -1,0 +1,3 @@
+export const CREATE_LXC = 'CRAETE_LXC';
+export const CREATE_LXC_SUCCESS = 'CRAETE_LXC_SUCCESS';
+export const CREATE_LXC_FAIL = 'CRAETE_LXC_FAIL';

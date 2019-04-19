@@ -2,6 +2,7 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import UserLayoutContainer from "./AdminLayoutContainer";
 import {withStyles} from "@material-ui/core";
+import t from "../../locale/locale";
 
 const styles = theme => ({
   root: {
@@ -18,10 +19,10 @@ const AdminListContainer = (props) => {
   return (
       <UserLayoutContainer>
         <Typography variant="h4" gutterBottom component="h2">
-          User list
+          {t.admin.list.userList}
         </Typography>
         <Typography component="div" className={classes.tableContainer}>
-          Content
+          {t.admin.list.content}
         </Typography>
       </UserLayoutContainer>
   );

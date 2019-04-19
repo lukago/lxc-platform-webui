@@ -1,49 +1,33 @@
-import React, { Component } from 'react';
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
-import { reactLocalStorage } from 'reactjs-localstorage'
-import jwtDecode from 'jwt-decode'
+import React, {Component} from 'react';
+import {BrowserRouter, Switch} from 'react-router-dom';
 import LogoutContainer from './login/LogoutContainer'
 import LoginContainer from './login/LoginContainer'
-import UserDashboardContainer from './admin/AdminDashboardContainer'
-import UserListContainer from './admin/AdminListContainer'
+import AdminDashboardContainer from './admin/AdminDashboardContainer'
+import AdminListContainer from './admin/AdminListContainer'
+import UserProfileContainer from "./user/UserProfileContainer";
+import UserDashboardContainer from "./user/UserDashboardContainer";
+import {appRoles, routes} from "../config/appData";
+import AuthorizedRoute from "./AuthorizedRoute";
 import './App.css';
+import LxcContainer from "./admin/lxc/LxcContainer";
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      token: reactLocalStorage.get('token'),
-      user: reactLocalStorage.get('token') != null ? jwtDecode(reactLocalStorage.get('token')) : null,
-    }
-  }
-
   render() {
-    if (!this.state.user) {
-      return (
-          <BrowserRouter>
-            <div>
-              <Switch>
-                <Route path ="/" exact component={LoginContainer}/>
-              </Switch>
-            </div>
-          </BrowserRouter>
-      );
-    }
-
-    if (this.state.user) {
-      return (
-          <BrowserRouter>
-            <div>
-              <Switch>
-                <Route path ="/logout" component={LogoutContainer} />
-                <Route path ="/users" exact component={UserListContainer} />
-                <Route path ="/" exact component={UserDashboardContainer} />
-              </Switch>
-            </div>
-          </BrowserRouter>
-      )
-    }
+    return (
+      <BrowserRouter>
+        <div>
+          <Switch>
+            <AuthorizedRoute path ={routes.LANDING} exact component={LoginContainer} roles={[appRoles.NONE]}/>
+            <AuthorizedRoute path ={routes.ADMIN_DASHBOARD} exact component={AdminDashboardContainer} roles={[appRoles.ADMIN]} />
+            <AuthorizedRoute path ={routes.ADMIN_USERS} exact component={AdminListContainer} roles={[appRoles.ADMIN]}/>
+            <AuthorizedRoute path ={routes.ADMIN_LXC} exact component={LxcContainer} roles={[appRoles.ADMIN]}/>
+            <AuthorizedRoute path ={routes.CLIENT_DASHBOARD} exact component={UserDashboardContainer} roles={[appRoles.CLIENT]}/>
+            <AuthorizedRoute path ={routes.CLIENT_PROFILE} exact component={UserProfileContainer} roles={[appRoles.CLIENT]} />
+            <AuthorizedRoute path ={routes.LOGOUT} exact component={LogoutContainer} roles={[appRoles.CLIENT, appRoles.ADMIN]}/>
+          </Switch>
+        </div>
+      </BrowserRouter>
+    );
   }
 }
-
 export default App;

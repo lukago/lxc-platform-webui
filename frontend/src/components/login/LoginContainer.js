@@ -1,9 +1,14 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import * as authActions from './authActions';
+import {
+  saveUserInLocalStorage,
+  fetchCurrentUser,
+  startLogin,
+} from './authActions';
 import { reactLocalStorage } from 'reactjs-localstorage';
 import LoginScreen from './LoginScreen';
+import { appRoles, routes } from "../../config/appData";
 
 class LoginContainer extends Component {
   constructor(props) {
@@ -44,7 +49,9 @@ class LoginContainer extends Component {
     if (isUserAvailable) {
       this.props.saveUserInLocalStorage(this.props.user);
       if (this.props.redirect) {
-        window.location = '/';
+        this.props.user.roles.includes(appRoles.ADMIN)
+            ? window.location = routes.ADMIN_DASHBOARD
+            : window.location = routes.CLIENT_DASHBOARD
       }
     }
   }
@@ -103,4 +110,6 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, authActions)(LoginContainer);
+export default connect(mapStateToProps, {
+  startLogin, saveUserInLocalStorage, fetchCurrentUser,
+})(LoginContainer);

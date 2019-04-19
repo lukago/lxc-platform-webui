@@ -21,6 +21,8 @@ import PeopleIcon from '@material-ui/icons/People';
 import {Link} from "react-router-dom";
 import {reactLocalStorage} from "reactjs-localstorage";
 import AccountCircleOutlined from '@material-ui/icons/AccountCircleOutlined'
+import t from '../../locale/locale';
+import {routes} from "../../config/appData";
 
 const drawerWidth = 240;
 
@@ -118,23 +120,29 @@ class AdminLayoutContainer extends React.Component {
 
     const mainListItems = (
       <div>
-        <ListItem button component={Link} to="/">
+        <ListItem button component={Link} to={routes.ADMIN_DASHBOARD}>
           <ListItemIcon>
             <DashboardIcon />
           </ListItemIcon>
-          <ListItemText primary="Dashboard" />
+          <ListItemText primary={t.admin.layout.dashboard} />
         </ListItem>
-        <ListItem button component={Link} to="/users">
+        <ListItem button component={Link} to={routes.ADMIN_USERS}>
           <ListItemIcon>
             <ShoppingCartIcon />
           </ListItemIcon>
-          <ListItemText primary="Users" />
+          <ListItemText primary={t.admin.layout.users} />
         </ListItem>
-        <ListItem button component={Link} to="/logout">
+        <ListItem button component={Link} to={routes.ADMIN_LXC}>
+          <ListItemIcon>
+            <ShoppingCartIcon />
+          </ListItemIcon>
+          <ListItemText primary={t.admin.layout.lxc} />
+        </ListItem>
+        <ListItem button component={Link} to={routes.LOGOUT}>
           <ListItemIcon>
             <PeopleIcon />
           </ListItemIcon>
-          <ListItemText primary="Logout" />
+          <ListItemText primary={t.admin.layout.logout} />
         </ListItem>
       </div>
     );
@@ -149,7 +157,6 @@ class AdminLayoutContainer extends React.Component {
             <Toolbar disableGutters={!this.state.open} className={classes.toolbar}>
               <IconButton
                   color="inherit"
-                  aria-label="Open drawer"
                   onClick={this.handleDrawerOpen}
                   className={classNames(
                       classes.menuButton,
@@ -165,7 +172,7 @@ class AdminLayoutContainer extends React.Component {
                   noWrap
                   className={classes.title}
               >
-                Admin panel
+                {t.admin.layout.panel}
               </Typography>
               <AccountCircleOutlined className={classes.icon}/>
               {user.username}

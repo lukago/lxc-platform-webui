@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "LXC PaaS",
+  "name": "App for managing LXC containers",
   "icons": [
     {
       "src": "favicon.ico",

@@ -45,7 +45,6 @@ public class AuthApi {
   }
 
   @PostMapping("/signup")
-  @PreAuthorize("hasRole('ROLE_ADMIN')")
   @ApiOperation(value = "")
   @ApiResponses(value = {
       @ApiResponse(code = 400, message = "Something went wrong"),

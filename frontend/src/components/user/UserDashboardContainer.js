@@ -1,8 +1,10 @@
 import React from 'react';
+import _ from 'lodash';
 import Typography from '@material-ui/core/Typography';
 import UserLayoutContainer from "./UserLayoutContainer";
 import {withStyles} from "@material-ui/core";
 import {reactLocalStorage} from "reactjs-localstorage";
+import t from "../../locale/locale";
 
 const styles = theme => ({
   root: {
@@ -26,18 +28,18 @@ class UserDashboardContainer extends React.Component {
     return (
         <UserLayoutContainer>
           <Typography variant="h4" gutterBottom component="h2">
-            Account data
+            {t.user.dashboard.accountData}
           </Typography>
           <Typography component="div" className={classes.tableContainer}>
             <div>{user.email}</div>
-            <div>{user.roles}</div>
+            <div>{_.toString(user.roles)}</div>
             <div>{user.username}</div>
           </Typography>
           <Typography variant="h4" gutterBottom component="h2">
-            Header
+            {t.user.dashboard.header}
           </Typography>
           <div className={classes.tableContainer}>
-            Content
+            {t.user.dashboard.content}
           </div>
         </UserLayoutContainer>
     );

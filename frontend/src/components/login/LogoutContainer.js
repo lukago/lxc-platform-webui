@@ -1,7 +1,8 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
 import { reactLocalStorage } from 'reactjs-localstorage';
-import * as authActions from './authActions';
+import { handleLogout } from './authActions';
+import { routes } from "../../config/appData";
 
 class LogoutContainer extends Component {
   componentDidMount() {
@@ -12,7 +13,7 @@ class LogoutContainer extends Component {
     const token = reactLocalStorage.get('token');
     if (!!token && this.props.loggedOut) {
       reactLocalStorage.clear();
-      window.location = this.props.mainPageUrl;
+      window.location = routes.LANDING;
     }
   }
 
@@ -21,11 +22,10 @@ class LogoutContainer extends Component {
   }
 }
 
-function mapStateToProps({ config, auth }) {
+function mapStateToProps({ auth }) {
   return {
-    mainPageUrl: '/',
     loggedOut: auth.loggedOut,
   };
 }
 
-export default connect(mapStateToProps, authActions)(LogoutContainer);
+export default connect(mapStateToProps, { handleLogout })(LogoutContainer);

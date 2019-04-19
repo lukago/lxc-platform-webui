@@ -1,8 +1,8 @@
 import axios from 'axios';
-import { BASE_URL } from './links';
+import { links } from './appData';
 
 export const axiosClient = axios.create({
-  baseURL: BASE_URL,
+  baseURL: links.BASE_URL,
   responseType: 'json',
   headers: {
     common: { Accept: 'application/json' },

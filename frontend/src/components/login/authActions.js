@@ -7,6 +7,7 @@ import {
   LOGOUT,
   USER_SAVED_IN_LOCAL_STORAGE,
 } from './types';
+import {routes} from "../../config/appData";
 
 
 export const saveUserInLocalStorage = user => async (dispatch) => {
@@ -66,7 +67,7 @@ export const clearUserData = () => {
     let cookies = new Cookies();
     cookies.remove('login');
     reactLocalStorage.clear();
-    window.location = '/';
+    window.location = routes.LANDING;
   } catch (error) {
     console.log('error', error);
   }

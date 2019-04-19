@@ -2,13 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
+import Paper from '@material-ui/core/Paper';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import FormControl from '@material-ui/core/FormControl';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import ErrorIcon from '@material-ui/icons/ErrorOutlined';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
-import * as t from '../../locale/translations';
+import t from '../../locale/locale';
 import TextField from "@material-ui/core/TextField/TextField";
 import CircularProgress from "@material-ui/core/CircularProgress/CircularProgress";
 import Chip from "@material-ui/core/Chip/Chip";
@@ -58,12 +59,12 @@ const LoginScreen = (props) => {
   return (
       <main className={classes.main}>
         <CssBaseline />
-        <paper className={classes.paper}>
+        <Paper className={classes.paper}>
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            {t.login.head}
           </Typography>
           <form className={classes.form}>
             <FormControl margin="normal" required fullWidth>
@@ -82,7 +83,6 @@ const LoginScreen = (props) => {
                   type="password"
                   id="password"
                   autoComplete="current-password"
-                  propName="username"
                   label={t.login.password}
                   value={credentials.password}
                   onChange={handleChange('password')}
@@ -118,7 +118,7 @@ const LoginScreen = (props) => {
             </Button>
           </form>
 
-        </paper>
+        </Paper>
       </main>
   );
 };
