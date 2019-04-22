@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.MediaType
 import spock.lang.Shared
 
+import javax.persistence.EntityManager
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
 
@@ -93,6 +95,8 @@ class AuthenticationSpec extends MockMvcSpec {
         .content(toJson(jwtRequest))
         .contentType(MediaType.APPLICATION_JSON))
         .andReturn().response
+
+
 
     then:
     response.status == 403
