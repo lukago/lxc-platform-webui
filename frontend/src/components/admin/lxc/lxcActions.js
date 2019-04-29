@@ -1,11 +1,13 @@
 import {CREATE_LXC} from './types';
 import SockJS from 'sockjs-client'
 import Stomp from 'stomp-websocket'
+import {reactLocalStorage} from "reactjs-localstorage";
 
 export const connectSocket = () => (dispatch) => {
   const socket = new SockJS('http://localhost:8080/sc/lxcplatform');
   const stompClient = Stomp.over(socket);
-  stompClient.connect({}, (frame) => {
+  const token = reactLocalStorage.get('token');
+  stompClient.connect({Authorization: `Bearer ${token}`}, (frame) => {
     console.log('Connected: ' + frame);
     stompClient.subscribe('/sc/topic/jobs', (msg) => {
       console.log(msg);

@@ -8,6 +8,7 @@ import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +19,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
+import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -77,13 +79,25 @@ public class JwtTokenProvider {
     return null;
   }
 
+  public Optional<String> resolveToken(StompHeaderAccessor accessor) {
+    String bearerToken = Optional.ofNullable(accessor.getNativeHeader("Authorization"))
+        .map(list -> list.get(0))
+        .orElse("");
+
+    if (bearerToken.startsWith("Bearer ")) {
+      return Optional.of(bearerToken.substring("Bearer ".length()));
+    }
+
+    return Optional.empty();
+  }
+
   public boolean validateToken(String token) {
     try {
       Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token);
       return true;
     } catch (JwtException | IllegalArgumentException e) {
       log.info("Exception in jwt token provider when validation: {}", e);
-      throw new HttpException("Expired or invalid JWT token", HttpStatus.PRECONDITION_FAILED);
+      throw new HttpException("Expired or invalid JWT token", HttpStatus.UNAUTHORIZED);
     }
   }
 
