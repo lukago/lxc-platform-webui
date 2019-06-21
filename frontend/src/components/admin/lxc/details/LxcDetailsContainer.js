@@ -10,10 +10,6 @@ import {
 import TextField from "@material-ui/core/TextField/TextField";
 import Button from "@material-ui/core/Button/Button";
 import Divider from "@material-ui/core/Divider/Divider";
-import DialogTitle from "@material-ui/core/DialogTitle/DialogTitle";
-import DialogContent from "@material-ui/core/DialogContent/DialogContent";
-import DialogActions from "@material-ui/core/DialogActions/DialogActions";
-import Dialog from "@material-ui/core/Dialog/Dialog";
 import {FailDialog, OkDialog} from "../../../common/dialogs";
 
 const styles = theme => ({
@@ -103,24 +99,11 @@ class LxcDetailsContainer extends Component {
         <AdminLayoutContainer>
           <OkDialog open={this.state.showOk} handleClose={this.handleClose}/>
           <FailDialog open={this.state.showFail} handleClose={this.handleClose}/>
-          <Dialog onClose={this.handleClose} open={this.state.showOk}>
-            <DialogTitle id="customized-dialog-title">
-              {t.dialog.titleOk}
-            </DialogTitle>
-            <DialogContent>
-              {t.dialog.contentOk}
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={this.handleClose} color="primary">
-                {t.dialog.close}
-              </Button>
-            </DialogActions>
-          </Dialog>
           <Typography variant="h5" gutterBottom component="h2">
             {t.admin.lxc.details.header + ` (${match.params.lxcName})`}
           </Typography>
           <Typography component="div" className={classes.tableContainer}>
-            {JSON.stringify(this.props.lxcStatus)}
+            {JSON.stringify(this.props.userData)}
           </Typography>
           <Divider variant="middle"/>
           <Typography variant="h5" gutterBottom component="h2" className={classes.hdr}>
@@ -179,7 +162,7 @@ class LxcDetailsContainer extends Component {
               color="primary"
               onClick={this.sendUnassign}
           >
-            {t.admin.lxc.details.unassing}
+            {t.admin.lxc.details.unassign}
           </Button>
 
         </AdminLayoutContainer>
@@ -189,9 +172,9 @@ class LxcDetailsContainer extends Component {
 
 function mapStateToProps({ details }) {
   return {
-    inProgressFetchStatus: details.inProgress,
-    failedFetchStatus: details.createFailed,
-    lxcStatus: details.lxcStatus,
+    inProgressFetchUser: details.inProgress,
+    failedFetchUser: details.createFailed,
+    userData: details.userData,
     inProgressSend: details.inProgressSend,
     failedSend: details.failedSend,
   };

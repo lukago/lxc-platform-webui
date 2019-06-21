@@ -50,7 +50,7 @@ class LoginContainer extends Component {
       this.props.saveUserInLocalStorage(this.props.user);
       if (this.props.redirect) {
         this.props.user.roles.includes(appRoles.ADMIN)
-            ? window.location = routes.ADMIN_DASHBOARD
+            ? window.location = routes.ADMIN_LXC
             : window.location = routes.CLIENT_DASHBOARD
       }
     }

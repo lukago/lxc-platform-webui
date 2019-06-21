@@ -10,10 +10,11 @@ export const appRoles = {
 
 export const routes = {
   LANDING: '/',
-  ADMIN_DASHBOARD: '/admin/dashboard',
   ADMIN_USERS: '/admin/users',
   ADMIN_LXC: '/admin/lxc',
   ADMIN_LXC_DETAILS: '/admin/lxc/:lxcName',
+  ADMIN_USER_DETAILS: '/admin/users/:username',
+  ADMIN_PROFILE: '/admin/profile',
   CLIENT_DASHBOARD: '/client/dashboard',
   CLIENT_PROFILE: '/client/profile',
   LOGOUT: '/logout'

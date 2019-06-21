@@ -18,7 +18,7 @@ apply plugin: 'idea'
 apply plugin: 'docker'
 
 jar {
-  baseName = 'lxc-paas'
+  baseName = 'lxc-platform'
   version = '0.0.1-SNAPSHOT'
 }
 sourceCompatibility = 1.11
@@ -99,7 +99,7 @@ jar.dependsOn(':frontend:assemble')
 task buildDocker(type: Docker) {
   baseImage = 'develar/java:latest'
   push = false
-  tag = 'lukago/lxc-paas'
+  tag = 'lukago/lxc-platform'
   addFile {
     file 'app.jar'
   }

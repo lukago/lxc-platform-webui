@@ -2,15 +2,16 @@ import React, {Component} from 'react';
 import {BrowserRouter, Switch} from 'react-router-dom';
 import LogoutContainer from './login/LogoutContainer'
 import LoginContainer from './login/LoginContainer'
-import AdminDashboardContainer from './admin/AdminDashboardContainer'
-import AdminListContainer from './admin/AdminListContainer'
 import UserProfileContainer from "./user/UserProfileContainer";
 import UserDashboardContainer from "./user/UserDashboardContainer";
 import {appRoles, routes} from "../config/appData";
 import AuthorizedRoute from "./AuthorizedRoute";
 import './App.css';
 import LxcContainer from "./admin/lxc/LxcContainer";
+import UserlistContainer from "./admin/userlist/UserlistContainer";
 import LxcContainerDetails from "./admin/lxc/details/LxcDetailsContainer";
+import UserDetailsContainer
+  from "./admin/userlist/details/UserDetailsContainer";
 
 class App extends Component {
   render() {
@@ -19,8 +20,8 @@ class App extends Component {
         <div>
           <Switch>
             <AuthorizedRoute path ={routes.LANDING} exact component={LoginContainer} roles={[appRoles.NONE]}/>
-            <AuthorizedRoute path ={routes.ADMIN_DASHBOARD} exact component={AdminDashboardContainer} roles={[appRoles.ADMIN]} />
-            <AuthorizedRoute path ={routes.ADMIN_USERS} exact component={AdminListContainer} roles={[appRoles.ADMIN]}/>
+            <AuthorizedRoute path ={routes.ADMIN_USERS} exact component={UserlistContainer} roles={[appRoles.ADMIN]}/>
+            <AuthorizedRoute path ={routes.ADMIN_USER_DETAILS} exact component={UserDetailsContainer} roles={[appRoles.ADMIN]}/>
             <AuthorizedRoute path ={routes.ADMIN_LXC} exact component={LxcContainer} roles={[appRoles.ADMIN]}/>
             <AuthorizedRoute path ={routes.ADMIN_LXC_DETAILS} exact component={LxcContainerDetails} roles={[appRoles.ADMIN]}/>
             <AuthorizedRoute path ={routes.CLIENT_DASHBOARD} exact component={UserDashboardContainer} roles={[appRoles.CLIENT]}/>

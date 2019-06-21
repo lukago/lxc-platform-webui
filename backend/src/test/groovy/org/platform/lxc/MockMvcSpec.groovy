@@ -1,0 +1,34 @@
+package org.platform.lxc
+
+import groovy.json.JsonBuilder
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.test.web.servlet.MockMvc
+import org.springframework.test.web.servlet.setup.MockMvcBuilders
+import org.springframework.transaction.annotation.Transactional
+import org.springframework.web.context.WebApplicationContext
+import spock.lang.Specification
+
+import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.*
+
+@Transactional
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = [App])
+class MockMvcSpec extends Specification {
+
+  @Autowired
+  protected WebApplicationContext context
+
+  protected MockMvc mockMvc
+
+  void setup() {
+    this.mockMvc = MockMvcBuilders
+            .webAppContextSetup(context)
+            .apply(springSecurity())
+            .build()
+  }
+
+  String toJson(Object obj) {
+    return new JsonBuilder(obj).toPrettyString()
+  }
+
+}

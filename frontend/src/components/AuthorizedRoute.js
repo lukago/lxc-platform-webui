@@ -24,7 +24,7 @@ class AuthorizedRoute extends React.Component {
     }
 
     if (role === appRoles.ADMIN) {
-      return <Redirect to={routes.ADMIN_DASHBOARD} />;
+      return <Redirect to={routes.ADMIN_LXC} />;
     }
 
     if (role === appRoles.CLIENT) {

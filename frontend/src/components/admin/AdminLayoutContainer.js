@@ -16,7 +16,6 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import DashboardIcon from '@material-ui/icons/Dashboard';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import PeopleIcon from '@material-ui/icons/People';
 import {Link} from "react-router-dom";
 import {reactLocalStorage} from "reactjs-localstorage";
@@ -120,23 +119,23 @@ class AdminLayoutContainer extends React.Component {
 
     const mainListItems = (
       <div>
-        <ListItem button component={Link} to={routes.ADMIN_DASHBOARD}>
+        <ListItem button component={Link} to={routes.ADMIN_LXC}>
           <ListItemIcon>
             <DashboardIcon />
           </ListItemIcon>
-          <ListItemText primary={t.admin.layout.dashboard} />
+          <ListItemText primary={t.admin.layout.lxc} />
         </ListItem>
         <ListItem button component={Link} to={routes.ADMIN_USERS}>
           <ListItemIcon>
-            <ShoppingCartIcon />
+            <DashboardIcon />
           </ListItemIcon>
           <ListItemText primary={t.admin.layout.users} />
         </ListItem>
-        <ListItem button component={Link} to={routes.ADMIN_LXC}>
+        <ListItem button component={Link} to={routes.ADMIN_USER_DETAILS.replace(":username", this.state.user.username)}>
           <ListItemIcon>
-            <ShoppingCartIcon />
+            <DashboardIcon />
           </ListItemIcon>
-          <ListItemText primary={t.admin.layout.lxc} />
+          <ListItemText primary={t.admin.layout.profile} />
         </ListItem>
         <ListItem button component={Link} to={routes.LOGOUT}>
           <ListItemIcon>

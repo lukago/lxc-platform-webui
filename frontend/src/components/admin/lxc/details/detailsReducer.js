@@ -17,28 +17,28 @@ import {
 } from './types';
 
 const initialState = {
-  failedFetchStatus: false,
-  inProgressFetchStatus: false,
+  failedFetchUser: false,
+  inProgressFetchUser: false,
   failedSend: false,
   inProgressSend: false,
-  lxcStatus: {}
+  userData: {}
 };
 
 export default function (state = initialState, action) {
   switch (action.type) {
     case FETCH_LXC_STATUS:
-      return { ...state, inProgressFetchStatus: true, failedFetchStatus: false };
+      return { ...state, inProgressFetchUser: true, failedFetchUser: false };
 
     case FETCH_LXC_STATUS_SUCCESS:
       return {
         ...state,
-        inProgressFetchStatus: false,
-        failedFetchStatus: false,
-        lxcStatus: action.payload.data
+        inProgressFetchUser: false,
+        failedFetchUser: false,
+        userData: action.payload.data
       };
 
     case FETCH_LXC_STATUS_FAIL:
-      return { ...state, inProgressFetchStatus: false, failedFetchStatus: true };
+      return { ...state, inProgressFetchUser: false, failedFetchUser: true };
 
     case START_LXC:
     case STOP_LXC:

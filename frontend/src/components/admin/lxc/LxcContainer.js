@@ -19,10 +19,6 @@ import TableRow from "@material-ui/core/TableRow/TableRow";
 import TableCell from "@material-ui/core/TableCell/TableCell";
 import Table from "@material-ui/core/Table/Table";
 import TableBody from "@material-ui/core/TableBody/TableBody";
-import Dialog from "@material-ui/core/Dialog/Dialog";
-import DialogActions from "@material-ui/core/DialogActions/DialogActions";
-import DialogTitle from "@material-ui/core/DialogTitle/DialogTitle";
-import DialogContent from "@material-ui/core/DialogContent/DialogContent";
 import {routes} from "../../../config/appData";
 import {FailDialog, OkDialog} from "../../common/dialogs";
 
@@ -164,20 +160,6 @@ class LxcContainer extends React.Component {
                   : t.admin.lxc.create
               }
             </Button>
-            <Dialog onClose={this.handleClose} open={this.state.openDialog}>
-              <DialogTitle id="customized-dialog-title"
-                           onClose={this.handleClose}>
-                {t.admin.lxc.info}
-              </DialogTitle>
-              <DialogContent>
-                {t.admin.lxc.jobInfo}
-              </DialogContent>
-              <DialogActions>
-                <Button onClick={this.handleClose} color="primary">
-                  {t.admin.lxc.close}
-                </Button>
-              </DialogActions>
-            </Dialog>
           </div>
 
           <br/><br/><br/>

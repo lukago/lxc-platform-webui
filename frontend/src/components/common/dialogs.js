@@ -41,3 +41,24 @@ export const FailDialog = (props) => {
       </Dialog>
   );
 };
+
+export const DelDialog = (props) => {
+  return (
+      <Dialog onClose={props.handleClose} open={props.open}>
+        <DialogTitle id="customized-dialog-title">
+          {t.dialog.confirm}
+        </DialogTitle>
+        <DialogContent>
+          {t.dialog.deleteAsk}
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={props.handleDelete} color="primary">
+            {t.dialog.delete}
+          </Button>
+          <Button onClick={props.handleClose} color="primary">
+            {t.dialog.cancel}
+          </Button>
+        </DialogActions>
+      </Dialog>
+  );
+};

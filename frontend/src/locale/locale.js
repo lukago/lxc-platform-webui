@@ -22,7 +22,11 @@ const en = {
     contentOk: 'Action completed successfully',
     titleFail: 'Failed',
     contentFail: 'Action failed during request',
+    deleteAsk: 'Are you sure you want to delete this content?',
     close: 'Close',
+    confirm: 'Confirm',
+    delete: 'Delete',
+    cancel: 'Cancel',
   },
   login: {
     head: 'Sign in',
@@ -39,10 +43,26 @@ const en = {
       lxc: 'LXC',
       logout: 'Logout',
       panel: 'Admin panel',
+      profile: 'Profile'
     },
-    list: {
+    users: {
+      addUser: 'Add user',
+      username: 'Username',
+      email: 'Email',
+      password: 'Password',
+      confirmPassword: 'Confirm password',
+      roles: 'Roles',
+      create: 'Create',
+      delete: 'Delete',
       userList: 'User list',
       content: 'Content',
+      details: {
+        profile: 'Profile for username',
+        edit: 'Edit',
+        cancel: 'Cancel',
+        update: 'Update',
+        updatePassword: 'Update password',
+      }
     },
     dashboard: {
       accountData: 'Account data',
@@ -74,7 +94,7 @@ const en = {
         assign: 'Assign',
         start: 'Start',
         stop: 'Stop',
-        unassing: 'Unassign',
+        unassign: 'Unassign',
       }
     }
   },
