@@ -26,17 +26,19 @@ class AuthenticationSpec extends MockMvcSpec {
   UserService userService
 
   void setup() {
-    User user = new User()
+    UserDto user = new UserDto()
     user.setRoles(List.of(Role.ROLE_ADMIN, Role.ROLE_CLIENT))
     user.setEmail("testlxc@google.com")
     user.setUsername("user")
     user.setPassword("password123")
+    user.setPasswordRetype("password123")
 
-    User user2 = new User()
+    UserDto user2 = new UserDto()
     user2.setRoles(List.of(Role.ROLE_CLIENT))
     user2.setEmail("testlxc2@google.com")
     user2.setUsername("user2")
     user2.setPassword("password123")
+    user2.setPasswordRetype("password123")
 
     userService.signup(user)
     userService.signup(user2)
@@ -71,19 +73,6 @@ class AuthenticationSpec extends MockMvcSpec {
     user.email == "testlxc@google.com"
     user.roles.contains(Role.ROLE_ADMIN.name())
     user.roles.contains(Role.ROLE_CLIENT.name())
-  }
-
-  def 'should have permission'() {
-    when:
-    def response = mockMvc.perform(post('/api/auth/signup')
-        .content(toJson(new UserDto(
-        username: "usertest", roles: [Role.ROLE_ADMIN], email: "a2@a.com", password: "password123")))
-        .header("Authorization", "Bearer $token.token")
-        .contentType(MediaType.APPLICATION_JSON))
-        .andReturn().response
-
-    then:
-    response.status == 200
   }
 
   def 'should have no permission'() {
