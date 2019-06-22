@@ -1,4 +1,0 @@
-app:
-  image: lukago/lxc-platform
-  ports:
-    - "8080:8080"
