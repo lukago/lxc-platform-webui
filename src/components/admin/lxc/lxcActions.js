@@ -36,7 +36,7 @@ export const disconnectSocket = (stompClient) => (dispatch) => {
   });
 };
 
-export const createLxc = (lxcName, lxcUsername, lxcPassword) => {
+export const createLxc = (lxcName, lxcPort) => {
   return {
     type: CREATE_LXC,
     payload: {
@@ -45,8 +45,7 @@ export const createLxc = (lxcName, lxcUsername, lxcPassword) => {
         url: '/api/lxc',
         data: {
           name: lxcName,
-          username: lxcPassword,
-          password: lxcPassword
+          port: lxcPort,
         },
       },
     },

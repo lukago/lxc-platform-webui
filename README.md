@@ -1,5 +1,8 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Status 
+[![Build Status](https://travis-ci.com/lukago/lxc-platform-webui.svg?token=tsv9JMKpCY8piyBJajzn&branch=master)](https://travis-ci.com/lukago/lxc-platform-webui)
+
 ## Available Scripts
 
 In the project directory, you can run:

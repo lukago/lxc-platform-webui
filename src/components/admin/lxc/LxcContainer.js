@@ -49,8 +49,7 @@ class LxcContainer extends React.Component {
 
   state = {
     lxcName: '',
-    lxcUsername: '',
-    lxcPassword: '',
+    lxcPort: '',
     createFailed: false,
     openDialog: false,
   };
@@ -68,8 +67,7 @@ class LxcContainer extends React.Component {
       this.setState({
         ...this.state,
         lxcName: '',
-        lxcUsername: '',
-        lxcPassword: '',
+        lxcPort: '',
         createFailed: true,
         openDialog: false,
       });
@@ -77,8 +75,7 @@ class LxcContainer extends React.Component {
   }
 
   sendCreate = () => {
-    this.props.createLxc(this.state.lxcName, this.state.lxcUsername,
-        this.state.lxcPassword);
+    this.props.createLxc(this.state.lxcName, this.state.lxcPort);
     this.setState({
       openDialog: true,
     })
@@ -130,19 +127,10 @@ class LxcContainer extends React.Component {
             />
             <TextField
                 required
-                label={t.admin.lxc.lxcUsername}
+                label={t.admin.lxc.lxcPort}
                 autoComplete="username"
                 variant="outlined"
-                onChange={this.handleChange('lxcUsername')}
-                className={classes.box}
-            />
-            <TextField
-                required
-                label={t.admin.lxc.lxcPassword}
-                variant="outlined"
-                type="password"
-                autoComplete="current-password"
-                onChange={this.handleChange('lxcPassword')}
+                onChange={this.handleChange('lxcPort')}
                 className={classes.box}
             />
           </form>
@@ -183,7 +171,7 @@ class LxcContainer extends React.Component {
                   <TableRow key={lxc.name} hover={true} className={classes.row} onClick={this.redirect(lxc.name)}>
                     <TableCell>{lxc.name}</TableCell>
                     <TableCell>
-                      {lxc.owner ? lxc.owner.username : t.admin.lxc.unasigned}
+                      {lxc.owner ? lxc.owner.username : t.admin.lxc.unassigned}
                     </TableCell>
                   </TableRow>
               ))}
