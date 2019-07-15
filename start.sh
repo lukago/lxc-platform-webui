@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-sudo docker build -t lxc-platform-webui .
-sudo docker-compose -f docker-compose-local.yml up
+docker build -t lxc-platform-webui .
+docker-compose -f docker-compose.local.yml up

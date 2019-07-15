@@ -9,11 +9,10 @@ export const connectSocket = () => (dispatch) => {
   const stompClient = Stomp.over(socket);
   const token = reactLocalStorage.get('token');
   stompClient.connect({Authorization: `Bearer ${token}`}, (frame) => {
-    console.log('Connected: ' + frame);
-    stompClient.subscribe('/sc/topic/jobs', (frame) => {
+    stompClient.subscribe(`/user/sc/topic/jobs`, (frame) => {
       const job = JSON.parse(frame.body);
       console.log(job);
-      if (job.jobStatus === "DONE") {
+      if (job.jobStatus === 'DONE' && job.jobCode === 'CREATE') {
         console.log('fetching lxc list dispatch');
         dispatch(fetchLxcList())
       }

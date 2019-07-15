@@ -5,7 +5,8 @@ import {withStyles} from "@material-ui/core";
 import t from "../../../../locale/locale";
 import connect from "react-redux/es/connect/connect";
 import {
-  fetchLxcStatus, startLxc, stopLxc, assignLxc, unassignLxc
+  fetchLxcStatus, startLxc, stopLxc,
+  assignLxc, unassignLxc, connectSocket, disconnectSocket, fetchServerInfo,
 } from "./detailsActions";
 import TextField from "@material-ui/core/TextField/TextField";
 import Button from "@material-ui/core/Button/Button";
@@ -44,7 +45,13 @@ class LxcDetailsContainer extends Component {
   };
 
   componentDidMount() {
+    this.props.connectSocket(this.props.match.params.lxcName);
     this.fetchStatus();
+    this.props.fetchServerInfo();
+  }
+
+  componentWillUnmount() {
+    this.props.disconnectSocket();
   }
 
   componentDidUpdate(prevProps) {
@@ -95,6 +102,11 @@ class LxcDetailsContainer extends Component {
 
   render() {
     const {classes, match} = this.props;
+    const data = {...this.props.userData, ip: this.props.serverInfo.ip};
+    const str = JSON.stringify(data, null, 2)
+    .replace(/\\n\\n/g, "\n\t")
+    .replace(/\\t/g, "\t")
+    .replace("Name:", "\n\tName:");
     return (
         <AdminLayoutContainer>
           <OkDialog open={this.state.showOk} handleClose={this.handleClose}/>
@@ -103,13 +115,22 @@ class LxcDetailsContainer extends Component {
             {t.admin.lxc.details.header + ` (${match.params.lxcName})`}
           </Typography>
           <Typography component="div" className={classes.tableContainer}>
-            {JSON.stringify(this.props.userData)}
+            <TextField
+                id="outlined-multiline-flexible"
+                multiline
+                rowsMax="100"
+                value={str}
+                className={classes.textField}
+                variant="outlined"
+                fullWidth={true}
+                disabled={true}
+            />
           </Typography>
           <Divider variant="middle"/>
           <Typography variant="h5" gutterBottom component="h2" className={classes.hdr}>
             {t.admin.lxc.details.actions.assign}
           </Typography>
-          <form className={classes.form}>
+          <div className={classes.form}>
             <TextField
                 required
                 autoComplete="username"
@@ -127,7 +148,7 @@ class LxcDetailsContainer extends Component {
             >
               {t.admin.lxc.details.assign}
             </Button>
-          </form>
+          </div>
           <Divider variant="middle" className={classes.divider}/>
           <Typography variant="h5" gutterBottom component="h2" className={classes.hdr}>
             {t.admin.lxc.details.actions.start}
@@ -175,11 +196,13 @@ function mapStateToProps({ details }) {
     inProgressFetchUser: details.inProgress,
     failedFetchUser: details.createFailed,
     userData: details.userData,
+    serverInfo: details.serverInfo,
     inProgressSend: details.inProgressSend,
     failedSend: details.failedSend,
   };
 }
 
 export default connect(mapStateToProps, {
-  fetchLxcStatus, startLxc, stopLxc, assignLxc, unassignLxc,
+  fetchLxcStatus, startLxc, stopLxc, assignLxc,
+  unassignLxc, connectSocket, disconnectSocket, fetchServerInfo,
 })(withStyles(styles)(LxcDetailsContainer));

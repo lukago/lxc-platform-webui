@@ -114,12 +114,6 @@ class UserlistContainer extends React.Component {
   handleUserCreateFailed(isFailed) {
     if (isFailed) {
       this.setState({
-        user: {
-          username: '',
-          email: '',
-          roles: [],
-          password: '',
-        },
         showOk: false,
         showFail: true,
         showDel: false,
@@ -136,6 +130,7 @@ class UserlistContainer extends React.Component {
   }
 
   sendCreate = () => {
+    console.log(this.state.user);
     this.props.createUser(this.state.user);
   };
 
