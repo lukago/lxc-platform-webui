@@ -16,12 +16,11 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import DashboardIcon from '@material-ui/icons/Dashboard';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import PeopleIcon from '@material-ui/icons/People';
 import {Link} from "react-router-dom";
 import {reactLocalStorage} from "reactjs-localstorage";
 import AccountCircleOutlined from '@material-ui/icons/AccountCircleOutlined'
-import t from "../../locale/locale";
+import t from '../../locale/locale';
 import {routes} from "../../config/appData";
 
 const drawerWidth = 240;
@@ -120,26 +119,32 @@ class UserLayoutContainer extends React.Component {
     const { user } = this.state;
 
     const mainListItems = (
-      <div>
-        <ListItem button component={Link} to={routes.CLIENT_DASHBOARD}>
-          <ListItemIcon>
-            <DashboardIcon />
-          </ListItemIcon>
-          <ListItemText primary={t.user.layout.dashboard} />
-        </ListItem>
-        <ListItem button component={Link} to={routes.CLIENT_PROFILE}>
-          <ListItemIcon>
-            <ShoppingCartIcon />
-          </ListItemIcon>
-          <ListItemText primary={t.user.layout.profile} />
-        </ListItem>
-        <ListItem button component={Link} to={routes.LOGOUT}>
-          <ListItemIcon>
-            <PeopleIcon />
-          </ListItemIcon>
-          <ListItemText primary={t.user.layout.logout} />
-        </ListItem>
-      </div>
+        <div>
+          <ListItem button component={Link} to={routes.CLIENT_DASHBOARD}>
+            <ListItemIcon>
+              <DashboardIcon />
+            </ListItemIcon>
+            <ListItemText primary={t.user.layout.dashboard} />
+          </ListItem>
+          <ListItem button component={Link} to={routes.CLIENT_JOBS.replace(':pageNr', 1)}>
+            <ListItemIcon>
+              <DashboardIcon />
+            </ListItemIcon>
+            <ListItemText primary={t.user.layout.jobs} />
+          </ListItem>
+          <ListItem button component={Link} to={routes.CLIENT_PROFILE}>
+            <ListItemIcon>
+              <DashboardIcon />
+            </ListItemIcon>
+            <ListItemText primary={t.user.layout.profile} />
+          </ListItem>
+          <ListItem button component={Link} to={routes.LOGOUT}>
+            <ListItemIcon>
+              <PeopleIcon />
+            </ListItemIcon>
+            <ListItemText primary={t.user.layout.logout} />
+          </ListItem>
+        </div>
     );
 
     return (
@@ -169,16 +174,14 @@ class UserLayoutContainer extends React.Component {
               >
                 {t.user.layout.panel}
               </Typography>
-
               <AccountCircleOutlined className={classes.icon}/>
               {user.username}
-
             </Toolbar>
           </AppBar>
           <Drawer
               variant="permanent"
               classes={{
-                form: classNames(classes.drawerPaper, !this.state.open && classes.drawerPaperClose),
+                paper: classNames(classes.drawerPaper, !this.state.open && classes.drawerPaperClose),
               }}
               open={this.state.open}
           >

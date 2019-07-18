@@ -43,7 +43,8 @@ const en = {
       lxc: 'LXC',
       logout: 'Logout',
       panel: 'Admin panel',
-      profile: 'Profile'
+      profile: 'Profile',
+      jobs: 'Jobs',
     },
     users: {
       addUser: 'Add user',
@@ -58,6 +59,7 @@ const en = {
       content: 'Content',
       details: {
         profile: 'Profile for username',
+        me: 'My profile',
         edit: 'Edit',
         cancel: 'Cancel',
         update: 'Update',
@@ -70,10 +72,12 @@ const en = {
       content: 'Content',
     },
     lxc: {
+      back: 'Back',
       addLxc: 'Add LXC',
       lxcList: 'LXC list',
       lxcName: 'Container name',
       lxcPort: 'Container port',
+      address: 'IP address',
       lxcUsername: 'Container username',
       lxcPassword: 'Container password',
       create: 'Create',
@@ -97,14 +101,27 @@ const en = {
         stop: 'Stop',
         unassign: 'Unassign',
       }
-    }
+    },
+    jobs: {
+      key: "Key",
+      description: "Description",
+      jobStatus: "Status",
+      jobCode: "Code",
+      startDate: "Started at",
+      endDate: "Finished at",
+      createdBy: "Started by",
+      jobList: "Most recent jobs",
+      next: "Next",
+      prev: "Prev",
+    },
   },
   user: {
     layout: {
       dashboard: 'Dashboard',
       profile: 'Profile',
       logout: 'Logout',
-      panel: 'User panel',
+      panel: 'LXC',
+      jobs: 'Jobs'
     },
     profile: {
       userProfile: 'User profile',

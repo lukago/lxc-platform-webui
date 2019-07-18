@@ -1,8 +1,8 @@
 import React, {Component, Fragment} from 'react';
 import Typography from '@material-ui/core/Typography';
-import AdminLayoutContainer from "../../AdminLayoutContainer";
+import UserLayoutContainer from "../UserLayoutContainer";
 import {withStyles} from "@material-ui/core";
-import t from "../../../../locale/locale";
+import t from "../../../locale/locale";
 import connect from "react-redux/es/connect/connect";
 import {fetchUser, updateUserData, updateUserPassowrd} from "./detailsActions";
 import TextField from "@material-ui/core/TextField/TextField";
@@ -11,13 +11,13 @@ import DialogTitle from "@material-ui/core/DialogTitle/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent/DialogContent";
 import DialogActions from "@material-ui/core/DialogActions/DialogActions";
 import Dialog from "@material-ui/core/Dialog/Dialog";
-import {FailDialog, OkDialog} from "../../../common/dialogs";
+import {FailDialog, OkDialog} from "../../common/dialogs";
 import FormControl from "@material-ui/core/FormControl/FormControl";
 import Select from "@material-ui/core/Select/Select";
 import Input from "@material-ui/core/Input/Input";
 import Divider from "@material-ui/core/Divider/Divider";
 import {Link} from "react-router-dom";
-import {routes} from "../../../../config/appData";
+import {routes} from "../../../config/appData";
 
 const styles = theme => ({
   root: {
@@ -53,7 +53,7 @@ const styles = theme => ({
   },
 });
 
-class UserDetailsContainer extends Component {
+class UserProfileContainer extends Component {
   state = {
     user: {},
     showOk: false,
@@ -99,7 +99,7 @@ class UserDetailsContainer extends Component {
   }
 
   fetchUser = () => {
-    this.props.fetchUser(this.props.match.params.username);
+    this.props.fetchUser();
   };
 
   updateUser = () => {
@@ -109,7 +109,6 @@ class UserDetailsContainer extends Component {
 
   updatePassword = () => {
     this.props.updateUserPassowrd(
-        this.props.userData.username,
         this.state.oldPassword,
         this.state.password,
         this.state.passwordRetype,
@@ -178,13 +177,13 @@ class UserDetailsContainer extends Component {
   };
 
   render() {
-    const {classes, match} = this.props;
+    const {classes} = this.props;
     if (!this.state.user.username) {
       return <div/>;
     }
 
     return (
-        <AdminLayoutContainer>
+        <UserLayoutContainer>
           <OkDialog open={this.state.showOk} handleClose={this.handleClose}/>
           <FailDialog open={this.state.showFail}
                       handleClose={this.handleClose}/>
@@ -207,7 +206,7 @@ class UserDetailsContainer extends Component {
           <br/>
           <br/>
           <Typography variant="h5" gutterBottom component="h2">
-            {`${t.admin.users.details.profile}: '${match.params.username}'`}
+            {`${t.admin.users.details.me}`}
           </Typography>
           <form className={classes.form}>
             <TextField
@@ -353,7 +352,7 @@ class UserDetailsContainer extends Component {
             }
           </div>
 
-        </AdminLayoutContainer>
+        </UserLayoutContainer>
     );
   }
 }
@@ -370,4 +369,4 @@ function mapStateToProps({detailsUsr}) {
 
 export default connect(mapStateToProps, {
   fetchUser, updateUserData, updateUserPassowrd,
-})(withStyles(styles)(UserDetailsContainer));
+})(withStyles(styles)(UserProfileContainer));

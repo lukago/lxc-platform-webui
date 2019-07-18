@@ -21,6 +21,7 @@ import Table from "@material-ui/core/Table/Table";
 import TableBody from "@material-ui/core/TableBody/TableBody";
 import {routes} from "../../../config/appData";
 import {FailDialog, OkDialog} from "../../common/dialogs";
+import {fetchServerInfo} from "./details/detailsActions";
 
 const styles = theme => ({
   tableContainer: {
@@ -91,6 +92,7 @@ class LxcContainer extends React.Component {
   componentDidMount() {
     this.props.connectSocket();
     this.props.fetchLxcList();
+    this.props.fetchServerInfo();
   }
 
   componentWillUnmount() {
@@ -158,12 +160,14 @@ class LxcContainer extends React.Component {
           <Table className={classes.table}>
             <colgroup>
               <col style={{width: '30%'}}/>
-              <col style={{width: '70%'}}/>
+              <col style={{width: '30%'}}/>
+              <col style={{width: '40%'}}/>
             </colgroup>
             <TableHead>
               <TableRow>
                 <TableCell>{t.admin.lxc.name}</TableCell>
                 <TableCell>{t.admin.lxc.owner}</TableCell>
+                <TableCell>{t.admin.lxc.address}</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -173,6 +177,7 @@ class LxcContainer extends React.Component {
                     <TableCell>
                       {lxc.owner ? lxc.owner.username : t.admin.lxc.unassigned}
                     </TableCell>
+                    <TableCell>{this.props.serverInfo.ip}:{lxc.port}</TableCell>
                   </TableRow>
               ))}
             </TableBody>
@@ -182,14 +187,15 @@ class LxcContainer extends React.Component {
   }
 }
 
-function mapStateToProps({lxc}) {
+function mapStateToProps({lxc, details}) {
   return {
     inProgress: lxc.inProgress,
     createFailed: lxc.createFailed,
     lxcList: lxc.lxcList,
+    serverInfo: details.serverInfo,
   };
 }
 
 export default connect(mapStateToProps, {
-  createLxc, connectSocket, disconnectSocket, fetchLxcList,
+  createLxc, connectSocket, disconnectSocket, fetchLxcList, fetchServerInfo,
 })(withStyles(styles)(LxcContainer));

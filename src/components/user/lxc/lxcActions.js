@@ -1,4 +1,4 @@
-import {CREATE_LXC, FETCH_LXC_LIST} from './types';
+import {FETCH_LXC_LIST} from './types';
 import SockJS from 'sockjs-client'
 import Stomp from 'stomp-websocket'
 import {reactLocalStorage} from "reactjs-localstorage";
@@ -42,29 +42,13 @@ export const disconnectSocket = () => (dispatch) => {
   });
 };
 
-export const createLxc = (lxcName, lxcPort) => {
-  return {
-    type: CREATE_LXC,
-    payload: {
-      request: {
-        method: 'post',
-        url: '/api/lxc',
-        data: {
-          name: lxcName,
-          port: lxcPort,
-        },
-      },
-    },
-  };
-};
-
 export const fetchLxcList = () => {
   return {
     type: FETCH_LXC_LIST,
     payload: {
       request: {
         method: 'get',
-        url: '/api/lxc',
+        url: '/api/users/me/lxc',
       },
     },
   };

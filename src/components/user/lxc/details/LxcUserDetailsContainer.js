@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import Typography from '@material-ui/core/Typography';
-import AdminLayoutContainer from "../../AdminLayoutContainer";
+import UserLayoutContainer from "../../UserLayoutContainer";
 import {withStyles} from "@material-ui/core";
 import t from "../../../../locale/locale";
 import connect from "react-redux/es/connect/connect";
 import {
   fetchLxcStatus, startLxc, stopLxc,
-  assignLxc, unassignLxc, connectSocket, disconnectSocket, fetchServerInfo,
+  connectSocket, disconnectSocket, fetchServerInfo,
 } from "./detailsActions";
 import TextField from "@material-ui/core/TextField/TextField";
 import Button from "@material-ui/core/Button/Button";
@@ -39,9 +39,8 @@ const styles = theme => ({
   },
 });
 
-class LxcDetailsContainer extends Component {
+class LxcUserDetailsContainer extends Component {
   state = {
-    username: '',
     showOk: false,
     showFail: false,
   };
@@ -79,14 +78,6 @@ class LxcDetailsContainer extends Component {
     this.props.stopLxc(this.props.match.params.lxcName)
   };
 
-  sendAssign = () => {
-    this.props.assignLxc(this.props.match.params.lxcName, this.state.username)
-  };
-
-  sendUnassign = () => {
-    this.props.unassignLxc(this.props.match.params.lxcName)
-  };
-
   handleChange = name => event => {
     const value = event.target.value;
     this.setState(prevProps => ({
@@ -110,10 +101,10 @@ class LxcDetailsContainer extends Component {
     .replace(/\\t/g, "\t")
     .replace("Name:", "\n\tName:");
     return (
-        <AdminLayoutContainer>
+        <UserLayoutContainer>
           <OkDialog open={this.state.showOk} handleClose={this.handleClose}/>
           <FailDialog open={this.state.showFail} handleClose={this.handleClose}/>
-          <Button variant="contained" component={Link} to={routes.ADMIN_LXC}>
+          <Button variant="contained" component={Link} to={routes.CLIENT_DASHBOARD}>
             {t.admin.lxc.back}
           </Button>
           <br/>
@@ -132,29 +123,6 @@ class LxcDetailsContainer extends Component {
                 disabled={true}
             />
           </Typography>
-          <Divider variant="middle"/>
-          <Typography variant="h5" gutterBottom component="h2" className={classes.hdr}>
-            {t.admin.lxc.details.actions.assign}
-          </Typography>
-          <div className={classes.form}>
-            <TextField
-                required
-                autoComplete="username"
-                label={t.admin.lxc.details.username}
-                variant="outlined"
-                onChange={this.handleChange('username')}
-                className={classes.box}
-            />
-            <Button
-                type="submit"
-                variant="contained"
-                color="primary"
-                className={classes.btn}
-                onClick={this.sendAssign}
-            >
-              {t.admin.lxc.details.assign}
-            </Button>
-          </div>
           <Divider variant="middle" className={classes.divider}/>
           <Typography variant="h5" gutterBottom component="h2" className={classes.hdr}>
             {t.admin.lxc.details.actions.start}
@@ -179,36 +147,21 @@ class LxcDetailsContainer extends Component {
           >
             {t.admin.lxc.details.stop}
           </Button>
-          <Divider variant="middle" className={classes.divider}/>
-          <Typography variant="h5" gutterBottom component="h2" className={classes.hdr}>
-            {t.admin.lxc.details.actions.unassign}
-          </Typography>
-          <Button
-              type="submit"
-              variant="contained"
-              color="primary"
-              onClick={this.sendUnassign}
-          >
-            {t.admin.lxc.details.unassign}
-          </Button>
-
-        </AdminLayoutContainer>
+        </UserLayoutContainer>
     );
   }
 }
 
-function mapStateToProps({ details }) {
+function mapStateToProps({ lxcUserDetails }) {
   return {
-    inProgressFetchUser: details.inProgress,
-    failedFetchUser: details.createFailed,
-    userData: details.userData,
-    serverInfo: details.serverInfo,
-    inProgressSend: details.inProgressSend,
-    failedSend: details.failedSend,
+    userData: lxcUserDetails.userData,
+    serverInfo: lxcUserDetails.serverInfo,
+    inProgressSend: lxcUserDetails.inProgressSend,
+    failedSend: lxcUserDetails.failedSend,
   };
 }
 
 export default connect(mapStateToProps, {
-  fetchLxcStatus, startLxc, stopLxc, assignLxc,
-  unassignLxc, connectSocket, disconnectSocket, fetchServerInfo,
-})(withStyles(styles)(LxcDetailsContainer));
+  fetchLxcStatus, startLxc, stopLxc,
+  connectSocket, disconnectSocket, fetchServerInfo,
+})(withStyles(styles)(LxcUserDetailsContainer));

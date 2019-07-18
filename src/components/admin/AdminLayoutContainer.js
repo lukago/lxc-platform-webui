@@ -131,6 +131,12 @@ class AdminLayoutContainer extends React.Component {
           </ListItemIcon>
           <ListItemText primary={t.admin.layout.users} />
         </ListItem>
+        <ListItem button component={Link} to={routes.ADMIN_JOBS.replace(':pageNr', '1')}>
+          <ListItemIcon>
+            <DashboardIcon />
+          </ListItemIcon>
+          <ListItemText primary={t.admin.layout.jobs} />
+        </ListItem>
         <ListItem button component={Link} to={routes.ADMIN_USER_DETAILS.replace(":username", this.state.user.username)}>
           <ListItemIcon>
             <DashboardIcon />

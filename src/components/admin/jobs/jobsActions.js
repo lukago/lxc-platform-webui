@@ -1,8 +1,8 @@
-import {CREATE_LXC, FETCH_LXC_LIST} from './types';
-import SockJS from 'sockjs-client'
-import Stomp from 'stomp-websocket'
-import {reactLocalStorage} from "reactjs-localstorage";
+import {FETCH_JOB_LIST} from './types';
+import SockJS from "sockjs-client";
 import {links} from "../../../config/appData";
+import Stomp from "stomp-websocket";
+import {reactLocalStorage} from "reactjs-localstorage";
 
 let socket;
 let stompClient;
@@ -12,13 +12,10 @@ export const connectSocket = () => (dispatch) => {
   stompClient = Stomp.over(socket);
   const token = reactLocalStorage.get('token');
   stompClient.connect({Authorization: `Bearer ${token}`}, (frame) => {
-    stompClient.subscribe(`/user/sc/topic/jobs`, (frame) => {
+    stompClient.subscribe('/user/sc/topic/jobs', (frame) => {
       const job = JSON.parse(frame.body);
       console.log(job);
-      if (job.jobStatus === 'DONE' && job.jobCode === 'CREATE') {
-        console.log('fetching lxc list dispatch');
-        dispatch(fetchLxcList())
-      }
+      dispatch(fetchJobList(1));
     });
   });
   dispatch({
@@ -42,29 +39,14 @@ export const disconnectSocket = () => (dispatch) => {
   });
 };
 
-export const createLxc = (lxcName, lxcPort) => {
+export const fetchJobList = (pageNr) => {
+  const page = Number(pageNr) - 1;
   return {
-    type: CREATE_LXC,
-    payload: {
-      request: {
-        method: 'post',
-        url: '/api/lxc',
-        data: {
-          name: lxcName,
-          port: lxcPort,
-        },
-      },
-    },
-  };
-};
-
-export const fetchLxcList = () => {
-  return {
-    type: FETCH_LXC_LIST,
+    type: FETCH_JOB_LIST,
     payload: {
       request: {
         method: 'get',
-        url: '/api/lxc',
+        url: `/api/jobs/${page}`,
       },
     },
   };

@@ -1,11 +1,9 @@
 import {
-  ASSIGN_LXC,
   FETCH_LXC_STATUS,
   FETCH_SERVER_INFO,
   SOCKET_FETCH_LXC_STATUS_SUCCESS,
   START_LXC,
   STOP_LXC,
-  UNASSIGN_LXC,
 } from "./types";
 import SockJS from "sockjs-client";
 import {links} from "../../../../config/appData";
@@ -48,7 +46,11 @@ export const connectSocket = (lxcName) => (dispatch) => {
 export const disconnectSocket = () => (dispatch) => {
   if (stompClient != null) {
     try {
-      stompClient.disconnect();
+      try {
+        stompClient.disconnect();
+      } catch (e) {
+        console.log('Could not disconnect');
+      }
     } catch (e) {
       console.log('Could not disconnect');
     }
@@ -66,7 +68,7 @@ export const fetchLxcStatus = (lxcName) => {
     payload: {
       request: {
         method: 'get',
-        url: `/api/lxc/${lxcName}/status`,
+        url: `/api/users/me/lxc/${lxcName}/status`,
       },
     },
   };
@@ -90,7 +92,7 @@ export const startLxc = (lxcName) => {
     payload: {
       request: {
         method: 'post',
-        url: `/api/lxc/${lxcName}/start`,
+        url: `/api/users/me/lxc/${lxcName}/start`,
       },
     },
   };
@@ -102,31 +104,7 @@ export const stopLxc = (lxcName) => {
     payload: {
       request: {
         method: 'post',
-        url: `/api/lxc/${lxcName}/stop`,
-      },
-    },
-  };
-};
-
-export const assignLxc = (lxcName, username) => {
-  return {
-    type: ASSIGN_LXC,
-    payload: {
-      request: {
-        method: 'post',
-        url: `/api/lxc/${lxcName}/assign?username=${username}`,
-      },
-    },
-  };
-};
-
-export const unassignLxc = (lxcName) => {
-  return {
-    type: UNASSIGN_LXC,
-    payload: {
-      request: {
-        method: 'post',
-        url: `/api/lxc/${lxcName}/unassign`,
+        url: `/api/users/me/lxc/${lxcName}/stop`,
       },
     },
   };
