@@ -284,7 +284,7 @@ class UserDetailsContainer extends Component {
           <form className={classes.form}>
             <TextField
                 required
-                label={t.admin.users.password}
+                label={t.admin.users.oldPassword}
                 type="password"
                 autoComplete="current-password"
                 variant="outlined"
@@ -306,7 +306,7 @@ class UserDetailsContainer extends Component {
             />
             <TextField
                 required
-                label={t.admin.users.password}
+                label={t.admin.users.confirmPassword}
                 type="password"
                 autoComplete="current-password"
                 variant="outlined"
