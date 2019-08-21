@@ -33,8 +33,8 @@ const en = {
     username: 'Username',
     password: 'Password',
     start: 'Sign in',
-    spinner: 'Signing in...',
-    failed: 'Bad credentials. Try again.',
+    spinner: 'Signing in',
+    failed: 'Bad credentials. Try again',
   },
   admin: {
     layout: {
@@ -50,6 +50,7 @@ const en = {
       addUser: 'Add user',
       username: 'Username',
       email: 'Email',
+      oldPassword: 'Current password',
       password: 'Password',
       confirmPassword: 'Confirm password',
       roles: 'Roles',
@@ -137,8 +138,19 @@ const en = {
 
 const pl = {
   common: {
-    youAreLoggedInAs: 'Jesteś zalogowany jako',
-    back: 'Wstecz',
+    youAreLoggedInAs: 'Zalogowano jako',
+    back: 'Cofnij',
+    cancel: 'Anuluj',
+  },
+  dialog: {
+    titleOk: 'Zakońćż',
+    contentOk: 'Akcja zakończona pozytywnie',
+    titleFail: 'Błąd',
+    contentFail: 'Akcja nie powiodła się',
+    deleteAsk: 'Na pewno?',
+    close: 'Zamknij',
+    confirm: 'Potwierdź',
+    delete: 'Usuń',
     cancel: 'Anuluj',
   },
   login: {
@@ -146,41 +158,105 @@ const pl = {
     username: 'Login',
     password: 'Hasło',
     start: 'Zaloguj',
-    spinner: 'Uwieżytelnianie...',
-    failed: 'Niepoprawne dane. Spróbój ponownie.',
+    spinner: 'Uwierzytelnianie',
+    failed: 'Niepoprawne dane. Spróbój ponownie',
   },
   admin: {
     layout: {
-      dashboard: 'Tablica',
+      dashboard: 'Panel głowny',
       users: 'Użytkownicy',
+      lxc: 'LXC',
       logout: 'Wyloguj',
       panel: 'Panel administratora',
+      profile: 'Profil',
+      jobs: 'Zadania',
     },
-    list: {
+    users: {
+      addUser: 'Dodaj użytkownika',
+      username: 'Nazwa',
+      email: 'Email',
+      oldPassword: 'Obecne hasło',
+      password: 'Hasło',
+      confirmPassword: 'Potwierdź hasło',
+      roles: 'Role',
+      create: 'Utwórz',
+      delete: 'Usuń',
       userList: 'Lista użytkowników',
-      content: 'Zawartość',
+      content: 'Treść',
+      details: {
+        profile: 'Profil użytkownika',
+        me: 'Mój profil',
+        edit: 'Edytuj',
+        cancel: 'Anuluj',
+        update: 'Aktualizuj',
+        updatePassword: 'Aktualizuj hasło',
+      }
     },
     dashboard: {
       accountData: 'Dane konta',
       header: 'Nagłówek',
-      content: 'Zawartość',
-    }
+      content: 'Treść',
+    },
+    lxc: {
+      back: 'Cofnij',
+      addLxc: 'Dodaj LXC',
+      lxcList: 'Lista LXC',
+      lxcName: 'Nazwa',
+      lxcPort: 'Port',
+      address: 'Adres IP',
+      lxcUsername: 'Nazwa użytkownika do kontenera',
+      lxcPassword: 'Hasło do kontenera',
+      create: 'Utwórz',
+      name: 'Nazwa',
+      owner: 'Nazwa właściciela',
+      unassigned: '-',
+      info: 'Informacje',
+      jobInfo: 'Zgłoszono zlecenie stworzenia kontenera',
+      close: 'Zamknij',
+      details: {
+        header: 'Detale kontenera',
+        actions: {
+          assign: 'Przypisz użytkownika do kontenera',
+          unassign: 'Wypusz użytkownika z kontenera',
+          start: 'Włącz kontener',
+          stop: 'Wyłącz kontener',
+        },
+        username: 'Nazwa',
+        assign: 'Przypisz',
+        start: 'Włącz',
+        stop: 'Wyłącz',
+        unassign: 'Wypisz',
+      }
+    },
+    jobs: {
+      key: "Klucz",
+      description: "Opis",
+      jobStatus: "Status",
+      jobCode: "Kod",
+      startDate: "Rozpoczęta o",
+      endDate: "Zakończona o",
+      createdBy: "Rozpoczęta przez",
+      jobList: "Ostatnie zadania",
+      next: "Następna",
+      prev: "Poprzednia",
+    },
   },
   user: {
     layout: {
-      dashboard: 'Tablica',
+      dashboard: 'Panel główny',
       profile: 'Profil',
       logout: 'Wyloguj',
-      panel: 'Panel użytkownika',
+      panel: 'LXC',
+      jobs: 'Zadania'
     },
     profile: {
       userProfile: 'Profil użytkownika',
-      content: 'Zawartość',
+      content: 'Treść',
     },
     dashboard: {
       accountData: 'Dane konta',
       header: 'Nagłówek',
-      content: 'Zawartość',
+      content: 'Treść',
     }
   }
 };
