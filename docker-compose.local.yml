@@ -10,7 +10,7 @@ services:
     - ./src:/usr/app/src
     environment:
     - NODE_ENV=development
-    - REACT_APP_API_URL=http://localhost:8081
+    - REACT_APP_API_URL=https://localhost:8443
     - REACT_APP_LOCALE=false
     - PORT=3003
     ports:
