@@ -3,8 +3,8 @@ import { reactLocalStorage } from 'reactjs-localstorage';
 import { axiosClient } from './axiosClient';
 import { sessionTimeout, clearUserData } from '../components/login/authActions';
 
-function handleUnauthorized(dispatch, status) {
-  if (status === 401) {
+function handleUnauthorized(dispatch, error) {
+  if (error && error.response && error.response.status === 401) {
     clearUserData();
     dispatch(sessionTimeout());
   }
@@ -23,7 +23,7 @@ const options = {
     }],
     response: [{
       error: ({ dispatch }, error) => {
-        handleUnauthorized(dispatch, error.response.status);
+        handleUnauthorized(dispatch, error);
         return Promise.reject(error);
       },
     }]

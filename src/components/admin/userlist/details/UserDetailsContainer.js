@@ -113,6 +113,7 @@ class UserDetailsContainer extends Component {
         this.state.oldPassword,
         this.state.password,
         this.state.passwordRetype,
+        this.props.userData.version,
     );
     this.setState({editModePwd: false});
   };

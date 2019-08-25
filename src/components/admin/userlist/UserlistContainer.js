@@ -86,7 +86,8 @@ class UserlistContainer extends React.Component {
     showOk: false,
     showFail: false,
     showDel: false,
-    usernameToDelete: ''
+    usernameToDelete: 1,
+    userToDeleteVersion: -1,
   };
 
 
@@ -158,15 +159,16 @@ class UserlistContainer extends React.Component {
     this.props.history.push(routes.ADMIN_USER_DETAILS.replace(':username', username))
   };
 
-  confirmDelete = (username) => () => {
+  confirmDelete = (username, version) => () => {
     this.setState({
       usernameToDelete: username,
+      userToDeleteVersion: version,
       showDel: true,
     })
   };
 
   handleDelete = () => {
-    this.props.deleteUser(this.state.usernameToDelete);
+    this.props.deleteUser(this.state.usernameToDelete, this.state.userToDeleteVersion);
     this.handleClose();
   };
 
@@ -278,7 +280,7 @@ class UserlistContainer extends React.Component {
                     <TableCell onClick={this.redirect(user.username)}>{user.email}</TableCell>
                     <TableCell onClick={this.redirect(user.username)}>{user.roles.join(', ')}</TableCell>
                     <TableCell>
-                      <IconButton className={classes.del} onClick={this.confirmDelete(user.username)}>
+                      <IconButton className={classes.del} onClick={this.confirmDelete(user.username, user.version)}>
                         <DeleteIcon />
                       </IconButton>
                     </TableCell>

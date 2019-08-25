@@ -21,13 +21,15 @@ export const updateUserData = (user) => {
         url: `/api/users/${user.username}`,
         data: {
           ...user,
-        }
+        },
+        headers: {'If-Match': user.version}
       },
     },
   };
 };
 
-export const updateUserPassowrd = (username, oldPassword, password, passwordRetype) => {
+export const updateUserPassowrd = (username, oldPassword, password,
+    passwordRetype, version) => {
   return {
     type: UPDATE_PASSWORD_USER,
     payload: {
@@ -38,7 +40,8 @@ export const updateUserPassowrd = (username, oldPassword, password, passwordRety
           oldPassword: oldPassword,
           password: password,
           passwordRetype: passwordRetype,
-        }
+        },
+        headers: {'If-Match': version}
       },
     },
   };

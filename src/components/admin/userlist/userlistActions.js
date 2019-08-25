@@ -19,13 +19,14 @@ export const createUser = (userDto) => {
   };
 };
 
-export const deleteUser = (username) => {
+export const deleteUser = (username, version) => {
   return {
     type: DELETE_USER,
     payload: {
       request: {
         method: 'delete',
         url: `/api/users/${username}`,
+        headers: {'If-Match': version}
       },
     },
   };
