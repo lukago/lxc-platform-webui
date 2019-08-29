@@ -60,7 +60,6 @@ class UserDetailsContainer extends Component {
     showFail: false,
     editMode: false,
     editModePwd: false,
-    oldPassword: '',
     password: '',
     passwordRetype: '',
   };
@@ -89,7 +88,6 @@ class UserDetailsContainer extends Component {
     if (done) {
       this.fetchUser();
       this.setState({
-        oldPassword: '',
         password: '',
         passwordRetype: '',
       });
@@ -110,7 +108,6 @@ class UserDetailsContainer extends Component {
   updatePassword = () => {
     this.props.updateUserPassowrd(
         this.props.userData.username,
-        this.state.oldPassword,
         this.state.password,
         this.state.passwordRetype,
         this.props.userData.version,
@@ -146,7 +143,6 @@ class UserDetailsContainer extends Component {
     this.setState(prevProps => ({
       ...prevProps,
       editModePwd: false,
-      oldPassword: '',
       password: '',
       passwordRetype: '',
     }));
@@ -283,17 +279,6 @@ class UserDetailsContainer extends Component {
             {t.admin.users.details.updatePassword}
           </Typography>
           <form className={classes.form}>
-            <TextField
-                required
-                label={t.admin.users.oldPassword}
-                type="password"
-                autoComplete="current-password"
-                variant="outlined"
-                onChange={this.handleChangePwd('oldPassword')}
-                className={classes.box}
-                value={this.state.oldPassword}
-                disabled={!this.state.editModePwd}
-            />
             <TextField
                 required
                 label={t.admin.users.password}

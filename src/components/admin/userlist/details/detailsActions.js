@@ -28,8 +28,7 @@ export const updateUserData = (user) => {
   };
 };
 
-export const updateUserPassowrd = (username, oldPassword, password,
-    passwordRetype, version) => {
+export const updateUserPassowrd = (username, password, passwordRetype, version) => {
   return {
     type: UPDATE_PASSWORD_USER,
     payload: {
@@ -37,7 +36,6 @@ export const updateUserPassowrd = (username, oldPassword, password,
         method: 'post',
         url: `/api/users/${username}/pwd`,
         data: {
-          oldPassword: oldPassword,
           password: password,
           passwordRetype: passwordRetype,
         },
