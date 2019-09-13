@@ -91,7 +91,7 @@ const en = {
       details: {
         header: 'LXC details',
         actions: {
-          assign: 'Assing user to container',
+          assign: 'Assign user to container',
           unassign: 'Unassign from container',
           start: 'Start container',
           stop: 'Stop container',
@@ -143,7 +143,7 @@ const pl = {
     cancel: 'Anuluj',
   },
   dialog: {
-    titleOk: 'Zakońćż',
+    titleOk: 'Zakończ',
     contentOk: 'Akcja zakończona pozytywnie',
     titleFail: 'Błąd',
     contentFail: 'Akcja nie powiodła się',
@@ -159,11 +159,11 @@ const pl = {
     password: 'Hasło',
     start: 'Zaloguj',
     spinner: 'Uwierzytelnianie',
-    failed: 'Niepoprawne dane. Spróbój ponownie',
+    failed: 'Niepoprawne dane. Spróbuj ponownie',
   },
   admin: {
     layout: {
-      dashboard: 'Panel głowny',
+      dashboard: 'Panel główny',
       users: 'Użytkownicy',
       lxc: 'LXC',
       logout: 'Wyloguj',
@@ -217,7 +217,7 @@ const pl = {
         header: 'Detale kontenera',
         actions: {
           assign: 'Przypisz użytkownika do kontenera',
-          unassign: 'Wypusz użytkownika z kontenera',
+          unassign: 'Wypisz użytkownika z kontenera',
           start: 'Włącz kontener',
           stop: 'Wyłącz kontener',
         },
